@@ -39,13 +39,11 @@ def main():
             break
 
     if guess == number:
-        guessesTaken = str(guessesTaken + 1)
-        print('What a heck?! Good job, ' + myName +
-              '! You did it by ' + guessesTaken + ' tries!')
+        print(f'What a heck?! Good job, {myName}'
+              f'! You did it by {guessesTaken + 1} tries!')
 
     if guess != number:
-        number = str(number)
-        print('You mad,bro! I guessed ' + number + '.')
+        print(f'You mad,bro! I guessed {number}.')
 
 
 if __name__ == '__main__':
