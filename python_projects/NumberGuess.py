@@ -22,7 +22,7 @@ def main():
     myName = input()
 
     number = random.randint(RANGE_OF_NUMBERS[0], RANGE_OF_NUMBERS[1])
-    print('So, ' + myName + ', i guessing the number from 1 to 20.')
+    print(f'So, {myName}, i guessing the number from 1 to 20.')
 
     for guessesTaken in range(NUMBER_OF_TRIES):
         print('Now it\'s your turn to guess! :)')
@@ -31,16 +31,13 @@ def main():
 
         if guess < number:
             print('Your number is too small! Try again ♥')
-
-        if guess > number:
+        else:
             print('Your number is too high! Try again ♥')
 
         if guess == number:
+            print(f'What a heck?! Good job, {myName}'
+                  f'! You did it by {guessesTaken + 1} tries!')
             break
-
-    if guess == number:
-        print(f'What a heck?! Good job, {myName}'
-              f'! You did it by {guessesTaken + 1} tries!')
 
     if guess != number:
         print(f'You mad,bro! I guessed {number}.')
