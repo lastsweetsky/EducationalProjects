@@ -6,6 +6,7 @@ NUMBER_OF_TRIES = 6
 
 def check_int_input():
     while True:
+        # TODO: check str
         try:
             guess = input()
             guess_int = int(guess)
@@ -31,7 +32,7 @@ def main():
 
         if guess < number:
             print('Your number is too small! Try again ♥')
-        else:
+        if guess > number:
             print('Your number is too high! Try again ♥')
 
         if guess == number:
