@@ -1,6 +1,8 @@
 import random
 import time
 
+CAVES_NUMBER = (1, 2)
+
 
 def displayIntro():
     print('''Вы находитесь в землях, заселенных драконами.
@@ -17,32 +19,35 @@ def chooseCave():
 
     return chosenCave
 
-#TODO: optimize time.sleep for every print in one line
-def checkCave(chosenCave):
-    print('Вы приближаетесь к пещере.')
-    time.sleep(2)
-    print('Топ...\nToп...')
-    time.sleep(2)
-    print('Ее темнота заставляет вас дрожать от страха...')
-    time.sleep(2)
-    print('Большой дракон выпрыгивает перед вами! Он раскрывает свою пасть и...')
-    print()
-    time.sleep(2)
 
-#TODO: use random for already known number of caves (made local/global cave_number)
-    friendlyCave = random.randint(1,2)
+def print_with_sleep(message, time_to_sleep = 2):
+    print(message)
+    time.sleep(time_to_sleep)
+
+
+def checkCave(chosenCave):
+    print_with_sleep('Вы приближаетесь к пещере.')
+    print_with_sleep('Топ...\nToп...')
+    print_with_sleep('Ее темнота заставляет вас дрожать от страха...')
+    print_with_sleep('Большой дракон выпрыгивает перед вами! Он раскрывает свою пасть и...')
+    print()
+
+    friendlyCave = random.randint(CAVES_NUMBER[0], CAVES_NUMBER[1])
 
     if chosenCave == str(friendlyCave):
         print('...делится с вами своими сокровищами!')
     else:
         print('...моментально вас съедает!')
 
-#TODO: add more possible variants of syntaxis (f.e. "ДА", "дА"...)
+
 playAgain = 'да'
-while playAgain == 'да' or playAgain == 'д':
+while playAgain == 'да' or playAgain == 'д' or playAgain == 'ls':
     displayIntro()
     caveNumber = chooseCave()
     checkCave(caveNumber)
 
     print('Попытаете удачу еще раз? (да или нет)')
-    playAgain = input()
+    playAgain = input().lower()
+else:
+    print('Спасибо за игру, друг! Приходи еще.')
+
