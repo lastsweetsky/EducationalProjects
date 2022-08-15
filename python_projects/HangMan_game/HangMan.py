@@ -1,11 +1,12 @@
 import random
 
-from hangman_data import HANGMAN_PICS, ALPHABET, WORD_LIST
+from hangman_data import HANGMAN_PICS, ALPHABET, WORD_DICT
 
 
-def getRandowWord(WORD_LIST):
-    wordIndex = random.randint(0, len(WORD_LIST) - 1)
-    return WORD_LIST[wordIndex]
+def getRandowWord(WORD_DICT):
+    wordKey = random.choice(list(WORD_DICT.keys()))
+    wordIndex = random.randint(0, len(WORD_DICT[wordKey]) - 1)
+    return WORD_DICT[wordKey][wordIndex], wordKey
 
 
 def displayBoard(missedLetters, correctLetters, secretWord):
@@ -45,12 +46,26 @@ def playAgain():
     return input('Хотите сыграть еще? (да или нет)\n').lower().startswith('д')
 
 print('В И С Е Л И Ц А')
+
+#TODO: function of deliting
+difficulty = 'default'
+while difficulty not in 'ЛСТ':
+    difficulty = input('Выберите уровень сложности: Л - Легкий, С - Средний, Т - Тяжелый\n').upper()
+if difficulty == 'С':
+    del HANGMAN_PICS[7:]
+if difficulty == 'Т':
+    del HANGMAN_PICS[3]
+    del HANGMAN_PICS[5]
+    del HANGMAN_PICS[7]
+    del HANGMAN_PICS[3]
+
 missedLetters = ''
 correctLetters = ''
-secretWord = getRandowWord(WORD_LIST)
+secretWord, secretSet = getRandowWord(WORD_DICT)
 gameIsDone = False
 
 while True:
+    print(f'Секретное слово из набора: {secretSet}')
     displayBoard(missedLetters, correctLetters, secretWord)
 
     guess = getGuess(missedLetters + correctLetters)
@@ -84,7 +99,7 @@ while True:
             missedLetters = ''
             correctLetters = ''
             gameIsDone = False
-            secretWord = getRandowWord(WORD_LIST)
+            secretWord, secretSet = getRandowWord(WORD_DICT)
         else:
             break
 
