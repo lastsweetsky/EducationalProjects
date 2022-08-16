@@ -45,20 +45,22 @@ def getGuess(alreadyGuessed):
 def playAgain():
     return input('Хотите сыграть еще? (да или нет)\n').lower().startswith('д')
 
+def choose_difficulty():
+    difficulty = 'default'
+    while difficulty not in 'ЛСТ':
+        difficulty = input('Выберите уровень сложности: Л - Легкий, С - Средний, Т - Тяжелый\n').upper()
+
+    if difficulty == 'С':
+        del HANGMAN_PICS[7:]
+
+    if difficulty == 'Т':
+        indexes = [3, 5, 7, 8]
+        for index in sorted(indexes, reverse=True):
+            del HANGMAN_PICS[index]
+
+
 print('В И С Е Л И Ц А')
-
-#TODO: function of deliting
-difficulty = 'default'
-while difficulty not in 'ЛСТ':
-    difficulty = input('Выберите уровень сложности: Л - Легкий, С - Средний, Т - Тяжелый\n').upper()
-if difficulty == 'С':
-    del HANGMAN_PICS[7:]
-if difficulty == 'Т':
-    del HANGMAN_PICS[3]
-    del HANGMAN_PICS[5]
-    del HANGMAN_PICS[7]
-    del HANGMAN_PICS[3]
-
+choose_difficulty()
 missedLetters = ''
 correctLetters = ''
 secretWord, secretSet = getRandowWord(WORD_DICT)
@@ -98,6 +100,7 @@ while True:
         if playAgain():
             missedLetters = ''
             correctLetters = ''
+            choose_difficulty()
             gameIsDone = False
             secretWord, secretSet = getRandowWord(WORD_DICT)
         else:
