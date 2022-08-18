@@ -49,7 +49,6 @@ def choose_difficulty():
     difficulty = 'default'
     while difficulty not in 'ЛСТ':
         difficulty = input('Выберите уровень сложности: Л - Легкий, С - Средний, Т - Тяжелый\n').upper()
-
     if difficulty == 'С':
         del HANGMAN_PICS[7:]
 
