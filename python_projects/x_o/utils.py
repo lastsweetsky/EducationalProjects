@@ -41,7 +41,7 @@ def isWinner(board, letter):
             (board[9] == letter and board[5] == letter and board[1] == letter))
 
 
-def getBoardCopy():
+def getBoardCopy(board):
     boardCopy = []
     for i in board:
         boardCopy.append(i)
@@ -67,14 +67,14 @@ def chooseRandomMoveFromList(board, moveList):
             possibleMoves.append(i)
 
     if len(possibleMoves) != 0:
-        return random.choise(possibleMoves)
+        return random.choice(possibleMoves)
     else:
         return None
 
 
 def getComputerMove(board, computerLetter):
     if computerLetter == 'X':
-        playerletter = 'O'
+        playerLetter = 'O'
     else:
         playerLetter = 'X'
 
@@ -89,7 +89,7 @@ def getComputerMove(board, computerLetter):
         boardCopy = getBoardCopy(board)
         if isSpaceFree(boardCopy, i):
             makeMove(boardCopy, playerLetter, i)
-            if isWinner(boardCopy, playerletter):
+            if isWinner(boardCopy, playerLetter):
                 return i
 
     move = chooseRandomMoveFromList(board, [1, 3, 7, 9])
@@ -107,51 +107,3 @@ def isBoardFull(board):
         if isSpaceFree(board, i):
             return False
     return True
-
-
-print('Игра "Крестики-нолики"')
-
-while True:
-    theBoard = [' '] * 10
-    playerLetter, computerLetter = inputPlayerLetter()
-    turn = whoGoesFirst()
-    print(f'{turn} ходит первым')
-    gameIsPlaying = True
-
-    while gameIsPlaying:
-        if turn == 'Человек':
-            drawBoard(theBoard)
-            move = getPlayerMove(theBoard)
-            makeMove(theBoard, playerLetter, move)
-
-        if isWinner(theBoard, playerLetter):
-            drawBoard(theBoard)
-            print('Поздравляем! Вы выиграли!')
-            gameIsPlaying = False
-        else:
-            if isBoardFull(theBoard):
-                drawBoard(theBoard)
-                print('Ничья!')
-                break
-            else:
-                turn = 'Компьютер'
-
-    else:
-        move = getComputerMove(theBoard, computerLetter)
-        makeMove(theBoard, computerLetter, move)
-
-        if isWinner(theBoard, computerLetter):
-            drawBoard(theBoard)
-            print('Компьютер победил! Вы проиграли!')
-            gameIsPlaying = False
-        else:
-            if isBoardFull(theBoard):
-                drawBoard(theBoard)
-                print('Ничья!')
-                break
-            else:
-                turn = 'Человек'
-
-    print('Сыграем еще раз? (да или нет)')
-    if not input().lower().startswith('д'):
-        break
