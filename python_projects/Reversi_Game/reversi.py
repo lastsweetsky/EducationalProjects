@@ -49,9 +49,9 @@ def isValidMove(board, tile, xstart, ystart):
                         break
                     tilesToFlip.append([x,y])
 
-        if len(tilesToFlip) == 0:
-            return False
-        return tilesToFlip
+    if len(tilesToFlip) == 0:
+        return False
+    return tilesToFlip
 
 
 def isOnBoard(x,y):
@@ -89,8 +89,8 @@ def getScoreOfBoard(board):
 
 def enterPlayerTile():
     tile = ''
-    while (tile == 'X' or tile == 'O'):
-        tile = input('Вы играете за Х или О?\n').upper
+    while not (tile == 'X' or tile == 'O'):
+        tile = input('Вы играете за Х или О?\n').upper()
 
     if tile == 'X':
         return ['X', 'O']
@@ -241,7 +241,7 @@ def main():
         if scores[playerTile] > scores[computerTile]:
             print(f'Вы победили компьютер, обогнав его на {scores[playerTile] - scores[computerTile]}')
         elif scores[playerTile] < scores[computerTile]:
-            print(f'Вы проиграли. Вы победили компьютер, обогнав его на {scores[computerTile] - scores[playerTile]}')
+            print(f'Вы проиграли. Компьютер обогнал Вас на {scores[computerTile] - scores[playerTile]}')
         else:
             print('Ничья!')
 
