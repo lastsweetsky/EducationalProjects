@@ -46,6 +46,7 @@ def calculate_price_aircraft_looses(
 ):
     return price * annual_rate_on_leasing/100
 
+
 def calculate_aircraft_cost_under_leasing(
         price_of_guaranteed_deposit : float,
         aircraft_price_looses : float,

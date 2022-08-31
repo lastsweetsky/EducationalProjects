@@ -6,6 +6,7 @@ def calculate_airport_charges(
 ):
     return (take_off_landing_maintenance_fees + commercial_service_fees + ground_maintenance_fees) * airport_fee_utilization_rate
 
+
 def calculate_route_service_fees(
         service_charge_on_root_for_100_km : float,
         orthodomic_distance : float,
