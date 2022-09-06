@@ -9,10 +9,10 @@ def calculate_airport_charges(
 
 def calculate_route_service_fees(
         service_charge_on_root_for_100_km : float,
-        orthodomic_distance : float,
+        l_i : float,
         max_take_off_weight : float
 ):
-    return service_charge_on_root_for_100_km * orthodomic_distance * (max_take_off_weight/5)**(1/2)
+    return service_charge_on_root_for_100_km * l_i * (max_take_off_weight/5)**(1/2)
 
 
 def calculate_air_navigation_charges(

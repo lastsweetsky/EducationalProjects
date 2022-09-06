@@ -8,6 +8,8 @@ from Diploma.data.aircrafts_data import AIRCRAFT_DATA
 
 import numpy as np
 
+from Diploma.utils.utils import read_parameter_by_parameter_name
+
 l_i = 500
 g_p_c = 40
 
@@ -26,6 +28,19 @@ orthodomic_distance = 36
 total_landing_fees = 15
 
 
+def filter_by_max_weight(g_p_max, g_p_c):
+    if g_p_max < g_p_c:
+        return False
+    else:
+        return True
+
+def filter_by_max_length(l_l, l_i):
+    if l_l < l_i:
+        return False
+    else:
+        return True
+
+
 def info_for_aircraft(aircraft_type, l_i=l_i, g_p_c=g_p_c):
     df_dict = {'Aircraft': aircraft_type}
 
@@ -33,6 +48,15 @@ def info_for_aircraft(aircraft_type, l_i=l_i, g_p_c=g_p_c):
                      for aircraft in AIRCRAFT_DATA
                      if aircraft["aircraft name"] == aircraft_type
                      ][0]["aircraft info"]
+
+    g_p_max = read_parameter_by_parameter_name(aircraft_info, 'G_p_max')
+    l_l = read_parameter_by_parameter_name(aircraft_info, 'L_l')
+
+    if not filter_by_max_weight(g_p_max, g_p_c):
+        return pd.DataFrame()
+
+    if not filter_by_max_length(l_l,l_i):
+        return pd.DataFrame()
 
     df_dict.update(test_first_phase_of_calculations(aircraft_info, l_i=l_i, g_p_c=g_p_c))
     df_dict.update(economic_substation(
@@ -61,16 +85,10 @@ def info_for_company(company_to_test='Airbus', g_p_c=g_p_c, l_i=l_i):
 
     if company_to_test == 'ALL':
         for company in COMPANIES_DATA.keys():
-            print(company)
             for aircraft_type in COMPANIES_DATA[company]:
-                print(company, aircraft_type)
-                df = df.append(info_for_aircraft(aircraft_type, g_p_c, l_i))
+                df = df.append(info_for_aircraft(aircraft_type, g_p_c=g_p_c, l_i=l_i))
         return df
 
     for aircraft_type in COMPANIES_DATA[company_to_test]:
-        df = df.append(info_for_aircraft(aircraft_type, g_p_c, l_i))
+        df = df.append(info_for_aircraft(aircraft_type, g_p_c=g_p_c, l_i=l_i))
     return df
-
-
-if __name__ == "__main__":
-    info_for_company()
