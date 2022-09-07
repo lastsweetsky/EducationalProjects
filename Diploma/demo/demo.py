@@ -56,6 +56,9 @@ app.layout = html.Div(
                 'textAlign': 'center',
                 'color': colors['text']
             }),
+        html.Br(),
+        html.Hr(),
+        html.Br(),
         html.Div(
             [
                 html.Label("Input weight of cargo in tons: ",
@@ -148,13 +151,12 @@ app.layout = html.Div(
         html.Br(),
 
         dcc.Checklist(
-            id = 'default',
-            options= [{'label': 'Use default values', 'value': 'Default'}],
+            id='default',
+            options=[{'label': 'Use default values', 'value': 'Default'}],
             style={'color': 'Gold',
                    'font-size': '16'}),
 
         html.Br(), html.Br(),
-
 
         html.Div(id='error-div',
                  style={
@@ -278,15 +280,51 @@ app.layout = html.Div(
         Input(component_id='company-selection', component_property='value'),
         Input("input_g_p_c", "value"),
         Input("input_l_i", "value"),
+
+        Input("s2-years", "value"),
+        Input("s2-country", 'value'),
+        Input("s2-gdeposit", "value"),
+        Input("s2-annual-rate-leasing", "value"),
+        Input("s2-annual-irocm", "value"),
+
+        Input("s3-takeoff-land-maint", "value"),
+        Input("s3-commercial-service", "value"),
+        Input("s3-ground-maint", "value"),
+        Input("s3-service-charge-100", "value"),
+        Input("s3-landing-fees", "value")
         # Input("groups-to-show", "value"),
     ]
 )
-def generate_results(aircraft_company, g_p_c, l_i, ):  # groups):
+
+def generate_results(
+        aircraft_company,
+        g_p_c,
+        l_i,
+        years,
+        country,
+        guaranteed_deposit,
+        annual_rate_on_leasing,
+        annual_interest_rate_on_capital_market,
+        take_off_landing_maintenance_fees,
+        commercial_service_fees,
+        ground_maintenance_fees,
+        service_charge_on_root_for_100_km,
+        total_landing_fees):  # groups):
+
     if not aircraft_company or not g_p_c or not l_i:
         return dash.no_update
 
-    to_return = info_for_company(aircraft_company, g_p_c, l_i)
-
+    to_return = info_for_company(company_to_test=aircraft_company, g_p_c=g_p_c, l_i=l_i, years=years,
+                                 country=country,
+                                 guaranteed_deposit=guaranteed_deposit,
+                                 annual_rate_on_leasing=annual_rate_on_leasing,
+                                 annual_interest_rate_on_capital_market=annual_interest_rate_on_capital_market,
+                                 take_off_landing_maintenance_fees=take_off_landing_maintenance_fees,
+                                 commercial_service_fees=commercial_service_fees,
+                                 ground_maintenance_fees=ground_maintenance_fees,
+                                 service_charge_on_root_for_100_km=service_charge_on_root_for_100_km,
+                                 total_landing_fees=total_landing_fees)
+    print(l_i)
     if to_return.empty:
         return None, None, 'No aircrafts with such parameters'
 
@@ -313,11 +351,10 @@ def print_callback(value, info1, info2):
     if info1 == 'From: ':
         return info1 + city_info, info2, None
     elif info2 == 'To: ':
-        print(info1[info1.find('Lon') + 4: info1.find(',')])
-        lon1 = float(info1[info1.find('Lon') + 4: info1.find(',')])
+        lon1 = float(info1[info1.find('Lon:') + 4: info1.find(',')])
         lat1 = float(info1[info1.find('Lat') + 4: info1.find(')')])
 
-        lon2 = float(city_info[city_info.find('Lon') + 4: city_info.find(',')])
+        lon2 = float(city_info[city_info.find('Lon:') + 4: city_info.find(',')])
         lat2 = float(city_info[city_info.find('Lat') + 4: city_info.find(')')])
 
         return info1, info2 + city_info, round(distance.distance((lat1, lon1), (lat2, lon2)).km)
@@ -336,27 +373,16 @@ def print_callback(value, info1, info2):
      Output("s3-commercial-service", 'value'),
      Output("s3-ground-maint", 'value'),
      Output("s3-service-charge-100", 'value'),
-     Output("s3-landing-fees", 'value')],
+     Output("s3-landing-fees", 'value'),
+     Output("input_g_p_c", 'value')],
 
-    Input("what-to-do", 'value'),
     Input("default", 'value'),
 )
-def import_for_stage(stage_name, use_default):
-    if not stage_name:
-        return dash.no_update
-
-
-    # if stage_name == 'Airport charges':
-    #     return None, None, None, None, None, 20, 10, 140, 15, 15
-    #
-    # if stage_name == 'Loan or leasing':
-    #     return 5, 25, 30, 10, 'UKR', None, None, None, None, None
-
+def update_default_values(use_default):
     if use_default:
-        return 5, 25, 30, 10, 'UKR', 20, 10, 140, 15, 15
+        return 5, 25, 30, 10, 'UKR', 20, 10, 140, 15, 15, 40
     else:
-        return None, None, None, None, None, None, None, None, None, None
-
+        return None, None, None, None, None, None, None, None, None, None, None
 
 
 if __name__ == '__main__':

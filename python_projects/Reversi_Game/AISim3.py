@@ -4,23 +4,25 @@ import sys
 WIDTH = 8
 HEIGHT = 8
 
+
 def drawBoard(board):
     print(' 12345678\n'
           ' +-------+')
     for y in range(HEIGHT):
-        print(y+1, end='')
+        print(y + 1, end='')
         for x in range(WIDTH):
             print(board[x][y], end='')
-        print(y+1)
-    print (' +-------+\n'
-           ' 12345678')
+        print(y + 1)
+    print(' +-------+\n'
+          ' 12345678')
+
 
 def getNewBoard():
-
     board = []
     for i in range(WIDTH):
         board.append([' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '])
     return board
+
 
 def isValidMove(board, tile, xstart, ystart):
     if board[xstart][ystart] != ' ' or not isOnBoard(xstart, ystart):
@@ -53,8 +55,10 @@ def isValidMove(board, tile, xstart, ystart):
         return False
     return tilesToFlip
 
+
 def isOnBoard(x, y):
     return x >= 0 and x <= WIDTH - 1 and y >= 0 and y <= HEIGHT - 1
+
 
 def getBoardWithValidMoves(board, tile):
     boardCopy = getBoardCopy(board)
@@ -63,6 +67,7 @@ def getBoardWithValidMoves(board, tile):
         boardCopy[x][y] = '.'
     return boardCopy
 
+
 def getValidMoves(board, tile):
     validMoves = []
     for x in range(WIDTH):
@@ -70,6 +75,7 @@ def getValidMoves(board, tile):
             if isValidMove(board, tile, x, y) != False:
                 validMoves.append([x, y])
     return validMoves
+
 
 def getScoreOfBoard(board):
     xscore = 0
@@ -80,7 +86,8 @@ def getScoreOfBoard(board):
                 xscore += 1
             if board[x][y] == 'O':
                 oscore += 1
-    return {'X':xscore, 'O':oscore}
+    return {'X': xscore, 'O': oscore}
+
 
 def enterPlayerTile():
     tile = ''
@@ -93,11 +100,13 @@ def enterPlayerTile():
     else:
         return ['O', 'X']
 
+
 def whoGoesFirst():
     if random.randint(0, 1) == 0:
         return 'Компьютер'
     else:
         return 'Человек'
+
 
 def makeMove(board, tile, xstart, ystart):
     tilesToFlip = isValidMove(board, tile, xstart, ystart)
@@ -110,6 +119,7 @@ def makeMove(board, tile, xstart, ystart):
         board[x][y] = tile
     return True
 
+
 def getBoardCopy(board):
     boardCopy = getNewBoard()
 
@@ -119,8 +129,10 @@ def getBoardCopy(board):
 
     return boardCopy
 
+
 def isOnCorner(x, y):
     return (x == 0 or x == WIDTH - 1) and (y == 0 or y == HEIGHT - 1)
+
 
 def getPlayerMove(board, playerTile):
     DIGITS1TO8 = '1 2 3 4 5 6 7 8'.split()
@@ -143,6 +155,7 @@ def getPlayerMove(board, playerTile):
 
     return [x, y]
 
+
 def getCornerBestMove(board, computerTile):
     possibleMoves = getValidMoves(board, computerTile)
     random.shuffle(possibleMoves)
@@ -160,6 +173,7 @@ def getCornerBestMove(board, computerTile):
             bestScore = score
     return bestMove
 
+
 def getWorstMove(board, tile):
     possibleMoves = getValidMoves(board, tile)
     random.shuffle(possibleMoves)
@@ -175,12 +189,15 @@ def getWorstMove(board, tile):
 
     return worstMove
 
+
 def getRandomMove(board, tile):
     possibleMoves = getValidMoves(board, tile)
     return random.choice(possibleMoves)
 
+
 def isOnSide(x, y):
     return x == 0 or x == WIDTH - 1 or y == 0 or y == HEIGHT - 1
+
 
 def getCornerSideBestMove(board, tile):
     possibleMoves = getValidMoves(board, tile)
@@ -196,9 +213,11 @@ def getCornerSideBestMove(board, tile):
 
     return getCornerBestMove(board, tile)
 
+
 def printScore(board, playerTile, computerTile):
     scores = getScoreOfBoard(board)
     print(f'Ваш счет: {scores[playerTile]}. Счет компьютера: {scores[computerTile]}.')
+
 
 def playGame(playerTile, computerTile):
     showHints = False
@@ -229,6 +248,7 @@ def playGame(playerTile, computerTile):
                 makeMove(board, computerTile, move[0], move[1])
             turn = 'Человек'
 
+
 NUM_GAMES = 250
 xWins = oWins = ties = 0
 
@@ -240,15 +260,13 @@ for i in range(NUM_GAMES):
     finalBoard = playGame(playerTile, computerTile)
 
     scores = getScoreOfBoard(finalBoard)
-    print(f'{i+1}: X набрал {scores["X"]} очков. О набрал {scores["O"]} очков.')
+    print(f'{i + 1}: X набрал {scores["X"]} очков. О набрал {scores["O"]} очков.')
     if scores[playerTile] > scores[computerTile]:
         xWins += 1
     elif scores[playerTile] < scores[computerTile]:
         oWins += 1
     else:
         ties += 1
-
-
 
 print(f'Number of X wins: {xWins} {xWins / NUM_GAMES * 100}%')
 print(f'Number of O wins: {oWins} {oWins / NUM_GAMES * 100}%')

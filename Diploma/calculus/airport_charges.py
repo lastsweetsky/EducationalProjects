@@ -6,7 +6,7 @@ ROUND_TO = 2
 
 def airport_charges(aircraft_info, airport_fee_utilization_rate, take_off_landing_maintenance_fees,
                     commercial_service_fees, ground_maintenance_fees, service_charge_on_root_for_100_km,
-                    orthodomic_distance, total_landing_fees):
+                    l_i, total_landing_fees):
     airport_charges = calculate_airport_charges(
         take_off_landing_maintenance_fees=take_off_landing_maintenance_fees,
         commercial_service_fees=commercial_service_fees,
@@ -17,7 +17,7 @@ def airport_charges(aircraft_info, airport_fee_utilization_rate, take_off_landin
 
     route_service_fees = calculate_route_service_fees(
         service_charge_on_root_for_100_km=service_charge_on_root_for_100_km,
-        orthodomic_distance=orthodomic_distance,
+        l_i=l_i,
         max_take_off_weight=max_take_off_weight)
 
     air_navigation_charges = calculate_air_navigation_charges(
