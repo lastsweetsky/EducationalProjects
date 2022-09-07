@@ -88,11 +88,13 @@ app.layout = html.Div(
                           ),
             ], style={'display': 'flex', 'justifyContent': 'center'}
         ),
+        html.Br(),
 
         dcc.Dropdown(
             options=[
                 {'label': a, 'value': a} for a in
                 ['Airbus', 'Boeing', 'Ilyushin', 'Antonov', 'ALL']],
+            placeholder="Select aircraft manufacturer",
             searchable=False,
             id='company-selection',
             style={
