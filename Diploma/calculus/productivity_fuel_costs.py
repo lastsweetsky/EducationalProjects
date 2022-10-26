@@ -77,9 +77,9 @@ def test_first_phase_of_calculations(aircraft_info, l_i, g_p_c, country="UKR"):
 
     return {
         'Productivity': a_ftk_c,
-        'Productivity to ideal': round(a_ftk_c / a_ftk_max, ROUND_TO),
+        'Productivity to maximum': round(a_ftk_c / a_ftk_max, ROUND_TO),
         'Fuel burnt per flight': Q_f,
-        'Fuel economy to ideal': round(q_sp_2 / q_sp_1, ROUND_TO),
+        'Fuel economy to maximum': round(q_sp_1 / q_sp_2, ROUND_TO),
         'Flight cost': c_f,
-        'Ecost for trasnp 1 unit': q_sp_2
+        'Specific fuel consumption': q_sp_2
     }

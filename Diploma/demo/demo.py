@@ -2,18 +2,14 @@
 # visit http://127.0.0.1:8050/ in your web browser.
 
 import dash
-import dash_core_components as dcc
-import dash_html_components as html
 from dash.dependencies import Input, Output
 from dash import Dash, dash_table
 from geopy import distance
 import geopandas as gpd
-from dash import dcc
+from dash import dcc, html
 from plotly import express as px
 from Diploma.calculations.calculations import info_for_company
 from Diploma.data.finance_data import FINANCE_DATA
-
-from Diploma.demo.demo_info import STAGES
 
 geo_df = gpd.read_file(gpd.datasets.get_path('naturalearth_cities'))
 fig = px.scatter_geo(
@@ -32,13 +28,14 @@ app = Dash(__name__)
 
 app.layout = html.Div(
     style={
-        'backgroundColor': colors['background']
+        'backgroundColor': colors['background'],
     },
     children=[
-        html.P(children="✈️",
+        html.H1(children="✈️",
                className="header-emoji",
                style={
-                   'textAlign': 'center'
+                   'textAlign': 'center',
+                   'font-size': '30px'
                }),
 
         html.H1(
@@ -61,7 +58,7 @@ app.layout = html.Div(
         html.Br(),
         html.Div(
             [
-                html.Label("Input weight of cargo in tons: ",
+                html.Label("Input weight of cargo in tons:  ",
                            style={
                                'textAlign': 'center',
                                'color': colors['text']
@@ -74,7 +71,7 @@ app.layout = html.Div(
                           max=10000
                           ),
 
-                html.Label("Input length of flight: ",
+                html.Label("Input length of flight:  ",
                            style={
                                'textAlign': 'center',
                                'color': colors['text']
@@ -116,39 +113,7 @@ app.layout = html.Div(
                  style={
                      'textAlign': 'center',
                      'color': colors['text']
-                 }),
-
-        # html.Label("Choose info to show:  ",
-        #            style={
-        #                'textAlign': 'center',
-        #                'color': colors['text']
-        #            }
-        #            ),
-
-        # dcc.Dropdown(
-        #     id='groups-to-show',
-        #     searchable=False,
-        #     multi=True,
-        #     options=[{'label': a, 'value': a} for a in column_groups.keys()],
-        #     style={
-        #         'color': colors['text']
-        #     }
-        # ),
-
-        html.Label("Choose what to do:  ",
-                   style={
-                       'textAlign': 'center',
-                       'color': colors['text']
-                   }
-                   ),
-        dcc.Dropdown(
-            id='what-to-do',
-            searchable=False,
-            multi=False,
-            options=[{'label': el, 'value': el} for el in STAGES],
-            style={
-                'color': colors['text']
-            }
+                 }
         ),
         html.Br(),
 
@@ -156,7 +121,9 @@ app.layout = html.Div(
             id='default',
             options=[{'label': 'Use default values', 'value': 'Default'}],
             style={'color': 'Gold',
-                   'font-size': '16'}),
+                   'font-size': '16',
+                   'textAlign': 'center',
+                   }),
 
         html.Br(), html.Br(),
 
@@ -165,10 +132,11 @@ app.layout = html.Div(
                      'textAlign': 'center',
                      'color': colors['text']
                  }),
-        #
+
         html.Label("Inputs for calculations of loan or leasing:  ",
                    style={
-                       'textAlign': 'center',
+                       'display':'flex',
+                       'justifyContent':'center',
                        'color': colors['text']
                    }
                    ),
@@ -180,15 +148,19 @@ app.layout = html.Div(
             type='number',
             placeholder="years",
             min=0,
-            max=200
+            max=200,style={'width': '24.5%', 'textAlign': 'center'}
         ),
-        #
+
         dcc.Input(
             id="s2-gdeposit",
             type='number',
             placeholder="guaranteed deposit",
             min=0,
-            max=100
+            max=100,
+            style={
+                'width': '24.5%',
+                'textAlign': 'center'
+            }
         ),
 
         dcc.Input(
@@ -196,7 +168,11 @@ app.layout = html.Div(
             type='number',
             placeholder="annual rate leasing",
             min=0,
-            max=100
+            max=100,
+            style={
+                'width': '24.5%',
+                'textAlign': 'center'
+            }
         ),
 
         dcc.Input(
@@ -204,11 +180,19 @@ app.layout = html.Div(
             type='number',
             placeholder="annual interest rate",
             min=0,
-            max=100
+            max=100,
+            style={
+                'width': '24.4%',
+                'textAlign': 'center'
+            }
         ),
+
+        html.Br(), html.Br(),
+
         dcc.Dropdown(
             options=[
                 {'label': a, 'value': a} for a in FINANCE_DATA.keys()],
+            placeholder="Select country of purchasing",
             searchable=False,
             id='s2-country',
             style={
@@ -216,11 +200,13 @@ app.layout = html.Div(
                 'color': colors['text']
             }
         ),
+        html.Br(),
 
         html.Label("Inputs for calculations of airport charges:  ",
                    style={
-                       'textAlign': 'center',
-                       'color': colors['text']
+                       'display':'flex',
+                       'justifyContent':'center',
+                       'color': colors['text'],
                    }
                    ),
         html.Br(),
@@ -230,7 +216,11 @@ app.layout = html.Div(
             type='number',
             placeholder="take off, landing, maint fees",
             min=0,
-            max=500
+            max=500,
+            style={
+                'width': '19.5%',
+                'textAlign': 'center'
+            }
         ),
 
         dcc.Input(
@@ -238,7 +228,11 @@ app.layout = html.Div(
             type='number',
             placeholder="commercial service fees",
             min=0,
-            max=500
+            max=500,
+            style={
+                'width': '19.5%',
+                'textAlign': 'center'
+            }
         ),
 
         dcc.Input(
@@ -246,7 +240,11 @@ app.layout = html.Div(
             type='number',
             placeholder="ground maint. fees",
             min=0,
-            max=500
+            max=500,
+            style={
+                'width': '19.5%',
+                'textAlign': 'center'
+            }
         ),
 
         dcc.Input(
@@ -254,7 +252,11 @@ app.layout = html.Div(
             type='number',
             placeholder="service charge per 100km",
             min=0,
-            max=500
+            max=500,
+            style={
+                'width': '19.5%',
+                'textAlign': 'center'
+            }
         ),
 
         dcc.Input(
@@ -262,12 +264,32 @@ app.layout = html.Div(
             type='number',
             placeholder="total landing fees",
             min=0,
-            max=500
+            max=500,
+            style={
+                'width': '19.4%',
+                'textAlign': 'center'
+            }
         ),
+
+        html.Br(), html.Hr(), html.Br(),
+
+        html.Label("Table of results",
+               style={
+                   'display':'flex',
+                   'justifyContent':'center',
+                   'color': 'Gold',
+               }
+       ),
+
+        html.Br(),
 
         dash_table.DataTable(
             id='calculations-results',
-            sort_action='native'
+            sort_action='native',
+            style_cell={
+                "whiteSpace":'normal',
+                "height":'auto',
+            },
         ),
     ])
 
@@ -294,7 +316,6 @@ app.layout = html.Div(
         Input("s3-ground-maint", "value"),
         Input("s3-service-charge-100", "value"),
         Input("s3-landing-fees", "value")
-        # Input("groups-to-show", "value"),
     ]
 )
 
@@ -311,7 +332,7 @@ def generate_results(
         commercial_service_fees,
         ground_maintenance_fees,
         service_charge_on_root_for_100_km,
-        total_landing_fees):  # groups):
+        total_landing_fees):
 
     if not aircraft_company or not g_p_c or not l_i:
         return dash.no_update
@@ -326,12 +347,8 @@ def generate_results(
                                  ground_maintenance_fees=ground_maintenance_fees,
                                  service_charge_on_root_for_100_km=service_charge_on_root_for_100_km,
                                  total_landing_fees=total_landing_fees)
-    print(l_i)
     if to_return.empty:
         return None, None, 'No aircrafts with such parameters'
-
-    # if groups:
-    #     to_return = to_return[['Aircraft'] + [column for group in groups for column in column_groups[group]]]
 
     return to_return.to_dict('records'), [{"name": i, "id": i} for i in to_return.columns], None
 
@@ -382,7 +399,7 @@ def print_callback(value, info1, info2):
 )
 def update_default_values(use_default):
     if use_default:
-        return 5, 25, 30, 10, 'UKR', 20, 10, 140, 15, 15, 40
+        return 5, 25, 20, 10, 'UKR', 20, 10, 140, 15, 15, 40
     else:
         return None, None, None, None, None, None, None, None, None, None, None
 

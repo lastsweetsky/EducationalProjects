@@ -5,26 +5,21 @@ from Diploma.calculus.productivity_fuel_costs import test_first_phase_of_calcula
 from Diploma.calculus.loan_leasing import economic_substation
 from Diploma.calculus.airport_charges import airport_charges
 from Diploma.data.aircrafts_data import AIRCRAFT_DATA
-
-import numpy as np
-
 from Diploma.utils.utils import read_parameter_by_parameter_name
 
 l_i = 500
 g_p_c = 40
 
 years = 5
-# country
 guaranteed_deposit = 25
 annual_rate_on_leasing = 30
 annual_interest_rate_on_capital_market = 10
 
-airport_fee_utilization_rate = 0.5  # constant
+airport_fee_utilization_rate = 0.5
 take_off_landing_maintenance_fees = 20
 commercial_service_fees = 10
 ground_maintenance_fees = 140
 service_charge_on_root_for_100_km = 15
-orthodomic_distance = 36
 total_landing_fees = 15
 
 

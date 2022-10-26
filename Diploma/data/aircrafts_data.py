@@ -1,4 +1,3 @@
-#TODO: deleate G_p_c
 AIRCRAFT_DATA = [
     {
         "aircraft name": "IL-76TD",
@@ -46,11 +45,6 @@ AIRCRAFT_DATA = [
             {
                 "parameter name": "G_p_max",
                 "parameter value": 40,
-                "parameter units": "t"
-            },
-            {
-                "parameter name": "G_p_c",
-                "parameter value": 30,
                 "parameter units": "t"
             },
             {
@@ -115,11 +109,6 @@ AIRCRAFT_DATA = [
                 "parameter units": "t"
             },
             {
-                "parameter name": "G_p_c",
-                "parameter value": 28,
-                "parameter units": "t"
-            },
-            {
                 "parameter name": "Price",
                 "parameter value": 65,
                 "parameter units": "million USD"
@@ -178,11 +167,6 @@ AIRCRAFT_DATA = [
             {
                 "parameter name": "G_p_max",
                 "parameter value": 20,
-                "parameter units": "t"
-            },
-            {
-                "parameter name": "G_p_c",
-                "parameter value": 12,
                 "parameter units": "t"
             },
             {
@@ -247,11 +231,6 @@ AIRCRAFT_DATA = [
                 "parameter units": "t"
             },
             {
-                "parameter name": "G_p_c",
-                "parameter value": 120,
-                "parameter units": "t"
-            },
-            {
                 "parameter name": "Price",
                 "parameter value": 182.30,
                 "parameter units": "million USD"
@@ -310,11 +289,6 @@ AIRCRAFT_DATA = [
             {
                 "parameter name": "G_p_max",
                 "parameter value": 18.5,
-                "parameter units": "t"
-            },
-            {
-                "parameter name": "G_p_c",
-                "parameter value": 15,
                 "parameter units": "t"
             },
             {
@@ -379,11 +353,6 @@ AIRCRAFT_DATA = [
                 "parameter units": "t"
             },
             {
-                "parameter name": "G_p_c",
-                "parameter value": 33,
-                "parameter units": "t"
-            },
-            {
                 "parameter name": "Price",
                 "parameter value": 20.07,
                 "parameter units": "million USD"
@@ -442,11 +411,6 @@ AIRCRAFT_DATA = [
             {
                 "parameter name": "G_p_max",
                 "parameter value": 120,
-                "parameter units": "t"
-            },
-            {
-                "parameter name": "G_p_c",
-                "parameter value": 100,
                 "parameter units": "t"
             },
             {
@@ -511,11 +475,6 @@ AIRCRAFT_DATA = [
                 "parameter units": "t"
             },
             {
-                "parameter name": "G_p_c",
-                "parameter value": 25,
-                "parameter units": "t"
-            },
-            {
                 "parameter name": "Price",
                 "parameter value": 60,
                 "parameter units": "million USD"
@@ -574,11 +533,6 @@ AIRCRAFT_DATA = [
             {
                 "parameter name": "G_p_max",
                 "parameter value": 10,
-                "parameter units": "t"
-            },
-            {
-                "parameter name": "G_p_c",
-                "parameter value": 7.5,
                 "parameter units": "t"
             },
             {
@@ -643,11 +597,6 @@ AIRCRAFT_DATA = [
                 "parameter units": "t"
             },
             {
-                "parameter name": "G_p_c",
-                "parameter value": 6,
-                "parameter units": "t"
-            },
-            {
                 "parameter name": "Price",
                 "parameter value": 36.25,
                 "parameter units": "million USD"
@@ -709,11 +658,6 @@ AIRCRAFT_DATA = [
                 "parameter units": "t"
             },
             {
-                "parameter name": "G_p_c",
-                "parameter value": 28,
-                "parameter units": "t"
-            },
-            {
                 "parameter name": "Price",
                 "parameter value": 241,
                 "parameter units": "million USD"
@@ -772,11 +716,6 @@ AIRCRAFT_DATA = [
             {
                 "parameter name": "G_p_max",
                 "parameter value": 18.8,
-                "parameter units": "t"
-            },
-            {
-                "parameter name": "G_p_c",
-                "parameter value": 13,
                 "parameter units": "t"
             },
             {

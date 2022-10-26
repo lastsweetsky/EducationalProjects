@@ -7,6 +7,7 @@ ROUND_TO = 2
 def airport_charges(aircraft_info, airport_fee_utilization_rate, take_off_landing_maintenance_fees,
                     commercial_service_fees, ground_maintenance_fees, service_charge_on_root_for_100_km,
                     l_i, total_landing_fees):
+
     airport_charges = calculate_airport_charges(
         take_off_landing_maintenance_fees=take_off_landing_maintenance_fees,
         commercial_service_fees=commercial_service_fees,
@@ -23,7 +24,6 @@ def airport_charges(aircraft_info, airport_fee_utilization_rate, take_off_landin
     air_navigation_charges = calculate_air_navigation_charges(
         total_landing_fees=total_landing_fees,
         route_service_fees=route_service_fees)
-
 
     return {
         'Airport charges': round(airport_charges, ROUND_TO),

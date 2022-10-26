@@ -66,4 +66,4 @@ def calculate_residual_value_for_leasing(
         aircraft_cost_under_leasing : float,
         price : float
 ):
-    return aircraft_cost_under_leasing - price
+    return  price - aircraft_cost_under_leasing
